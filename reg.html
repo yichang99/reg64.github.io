@@ -1,0 +1,89 @@
+<title>时钟</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+.datefront
+{
+position:absolute;
+visibility:visible;
+font-family:Arial;
+font-weight:bold;
+color:black;
+text-align: center;
+}
+
+.timefront
+{
+display:inline-block;
+transform:scale(1,2);
+-ms-transform:scale(1,2);
+-webkit-transform:scale(1,2);
+-moz-transform:scale(1,2);
+-o-transform:scale(1,2);
+position:absolute;
+visibility:visible;
+font-family:Arial;
+font-weight:bold;
+color:0;
+text-align:center;
+}
+
+</style>
+<head>
+<script language=javaScript>
+<!--//
+function clockon() {
+oDate= new Date();
+this.day = new Array("周日", "周一", "周二", "周三", "周四", "周五", "周六")[oDate.getDay()];
+//this.day = new Array("日", "一", "二", "三", "四", "五", "六")[oDate.getDay()];
+//this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[oDate.getDay()];
+//thisdate = oDate.toLocaleDateString()+" "+this.day+" ";
+
+timefront.innerHTML=format(oDate.getHours()) + ":" + format(oDate.getMinutes());;
+datefront.innerHTML=oDate.getFullYear()+"年"+(oDate.getMonth() + 1)+"月"+oDate.getDate()+"日 ";//format((oDate.getMonth() + 1))+"-"+format(oDate.getDate());
+dayfront.innerHTML=this.day;
+secfront.innerHTML=format(oDate.getSeconds());
+
+dayfront.style.color='';
+if(0==oDate.getDay())dayfront.style.color='red';
+if(6==oDate.getDay())dayfront.style.color='blue';
+
+var timer=setTimeout("clockon()",200)
+}
+function format(a)
+{
+    return a.toString().replace(/^(\d)$/, "0$1")
+}
+setTimeout("check()",1000)
+var lm = "";
+function check() {
+	var xmlServerHttp;
+    if(window.ActiveXObject){ //如果是IE浏览器     
+        xmlServerHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }else if(window.XMLHttpRequest){ //非IE浏览器     
+        xmlServerHttp = new XMLHttpRequest();
+    }
+	xmlServerHttp.open("GET", window.location.pathname, false);
+	xmlServerHttp.send();
+	if(lm == "")
+	{
+		lm = xmlServerHttp.getResponseHeader("Last-Modified")
+		last.innerHTML = lm;
+	}
+	else if( lm != xmlServerHttp.getResponseHeader("Last-Modified"))
+	{
+		location.reload();
+	}
+	setTimeout("check()",1000);
+}
+</script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="clockon()">
+<div class="timefront" style="top:250px; left:50px; font-size:240px;"><span id="timefront">1</span></div>
+
+<div class="datefront" style="top:50px; left:10px; width:900px; font-size:120px;"><span id="datefront">2</span></div>
+<div class="datefront" style="top:200px; left:700px; width:300px; font-size:120px;"><span id="dayfront">3</span></div>
+<div class="datefront" style="top:350px; left:700px; width:300px; font-size:200px;"><span id="secfront">4</span></div>
+
+<div id="last" style="position:absolute;visibility:none;font-family:Arial;font-weight:bold;color:0;font-size:24px;top:620px;left:50px;"></div>
+</div>
+</body>
