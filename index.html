@@ -31,7 +31,7 @@ Yi chang (仪长 00340119) <yichang99@126.com>
  - 升级为64位版本
 ******************************************** -->
 <HTML><HEAD><TITLE>寄存器分析(js版)</TITLE>
-<META http-equiv=content-type content="text/html; charset=utf-8">
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
 
 </HEAD>
 <body>
@@ -78,7 +78,7 @@ var $_GET = (function(){
 })();
 
 if("undefined"!=typeof($_GET["name"])){names=$_GET["name"];}
-if("undefined"!=typeof($_GET["name"]))urldecode($_GET["name"],"gbk",function(str){regname.value=str;document.title = str});
+if("undefined"!=typeof($_GET["name"]))urldecode($_GET["name"],"utf-8",function(str){regname.value=str;document.title = str});
 if("undefined"!=typeof($_GET["hex"]))hexstr = $_GET["hex"];
 if("undefined"!=typeof($_GET["gp"]))gp = $_GET["gp"];
 splist = $_GET["sp"];
