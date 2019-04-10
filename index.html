@@ -1,89 +1,255 @@
-<title>æ—¶é’Ÿ</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style>
-.datefront
+<!DOCTYPE html>
+<!-- saved from url=(0020)gssz:yi/changHexBIN-Dec/html -->
+<!-- ********************************************
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+¼Ä´æÆ÷·ÖÎö(js°æ)
+
+¡¾×ğÖØËûÈË´´×÷¡¤ÇëÎğÉ¾³ı»ò±ä¸ü´ËËµÃ÷¡¿
+
+Èç¹ûÄú¾õµÃÕâ¸ö¶«¶«²»´í£¬Äú¿ÉÒÔ×ÔÓÉ×ª¼Ä¸øÇ×ÅóºÃÓÑ·ÖÏí¡£
+×ÔÓÉÊ¹ÓÃ·¶Î§: Ñ§Ğ£¡¢¹«Ë¾ÄÚ²¿¡¢³ÌÊ½ÑĞ¾¿¡¢¸öÈËÍøÕ¾¹©ÈË²éÑ¯Ê¹ÓÃ¡£
+
+Open Source ²»´ú±í·ÅÆúÖø×÷È¨£¬ÈÎºÎĞÎÊ½Ö®ÒıÓÃ»ò×ªÔØÇ°ÇëÀ´ĞÅ¸æÖª!!
+ÈçĞèÓÚ¡¸ÉÌÒµ»òÓªÀû¡¹Ä¿µÄÖĞÊ¹ÓÃ´Ë²¿·İÖ®³ÌÊ½Âë»ò×ÊÁÏ£¬ĞèÈ¡µÃ±¾ÈËÊéÃæÊÚÈ¨¡£
+
+»¶Ó­À´ĞÅ»¥ÏàÌÖÂÛÑĞ¾¿ÓëÖ¸ÕıÎóÃı¡£
+
+Yi chang (ÒÇ³¤ 00340119) <yichang99@126.com>
+
+ --------------------------------------
+¼òÌåÖĞÎÄ(×÷ÕßÊÚÈ¨)
+
+¡¾×ğÖØËûÈË´´×÷¡¤ÇëÎğÉ¾³ı»ò±ä¸ü´ËËµÃ÷¡¿
+*************************************************
+
+³ÌĞò×îºóĞŞÕı:
+2018-8-26
+ - ³õ¸åÍê³É
+2018-9-4
+ - ĞŞ¸ÄÊµÏÖ£¬¼æÈİchrome¡¢IE8
+2018-9-4
+ - Éı¼¶Îª64Î»°æ±¾
+******************************************** -->
+<HTML><HEAD><TITLE>¼Ä´æÆ÷·ÖÎö(js°æ)</TITLE>
+<META http-equiv=content-type content="text/html; charset=gb2312">
+
+</HEAD>
+<body>
+<div id="htmlall"></div>
+<SCRIPT language=JScript>
+var hexstr="123456789ABCDEF0";
+var names="¼Ä´æÆ÷";
+var gp=0;
+var SP = new Array(65);
+var colors = ["5555FF","FF5555","33FF33","00FFFF","FF00FF","FFFF00","77FFCC","CC77FF"];
+var bytecolors = ["CCCCCC","FFFFFF"];
+var bitcolors = ["CCCCCC","FF0000"];
+var start_sp = 0;
+var end_sp = 0;
+
+//init
+for( i = 0; i < 65; i++)
 {
-position:absolute;
-visibility:visible;
-font-family:Arial;
-font-weight:bold;
-color:black;
-text-align: center;
+	SP[i] = 0;
 }
-
-.timefront
-{
-display:inline-block;
-transform:scale(1,2);
--ms-transform:scale(1,2);
--webkit-transform:scale(1,2);
--moz-transform:scale(1,2);
--o-transform:scale(1,2);
-position:absolute;
-visibility:visible;
-font-family:Arial;
-font-weight:bold;
-color:0;
-text-align:center;
-}
-
-</style>
-<head>
-<script language=javaScript>
-<!--//
-function clockon() {
-oDate= new Date();
-this.day = new Array("å‘¨æ—¥", "å‘¨ä¸€", "å‘¨äºŒ", "å‘¨ä¸‰", "å‘¨å››", "å‘¨äº”", "å‘¨å…­")[oDate.getDay()];
-//this.day = new Array("æ—¥", "ä¸€", "äºŒ", "ä¸‰", "å››", "äº”", "å…­")[oDate.getDay()];
-//this.day = new Array("æ˜ŸæœŸæ—¥", "æ˜ŸæœŸä¸€", "æ˜ŸæœŸäºŒ", "æ˜ŸæœŸä¸‰", "æ˜ŸæœŸå››", "æ˜ŸæœŸäº”", "æ˜ŸæœŸå…­")[oDate.getDay()];
-//thisdate = oDate.toLocaleDateString()+" "+this.day+" ";
-
-timefront.innerHTML=format(oDate.getHours()) + ":" + format(oDate.getMinutes());;
-datefront.innerHTML=oDate.getFullYear()+"å¹´"+(oDate.getMonth() + 1)+"æœˆ"+oDate.getDate()+"æ—¥ ";//format((oDate.getMonth() + 1))+"-"+format(oDate.getDate());
-dayfront.innerHTML=this.day;
-secfront.innerHTML=format(oDate.getSeconds());
-
-dayfront.style.color='';
-if(0==oDate.getDay())dayfront.style.color='red';
-if(6==oDate.getDay())dayfront.style.color='blue';
-
-var timer=setTimeout("clockon()",200)
-}
-function format(a)
-{
-    return a.toString().replace(/^(\d)$/, "0$1")
-}
-setTimeout("check()",1000)
-var lm = "";
-function check() {
-	var xmlServerHttp;
-    if(window.ActiveXObject){ //å¦‚æœæ˜¯IEæµè§ˆå™¨     
-        xmlServerHttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }else if(window.XMLHttpRequest){ //éIEæµè§ˆå™¨     
-        xmlServerHttp = new XMLHttpRequest();
+function urldecode(str, charset, callback) { 
+            window._urlDecodeFn_ = callback; 
+            var script = document.createElement('script'); 
+            script.id = '_urlDecodeFn_'; 
+            var src = 'data:text/javascript;charset=' + charset + ',_urlDecodeFn_("' + str + '");' 
+            src += 'document.getElementById("_urlDecodeFn_").parentNode.removeChild(document.getElementById("_urlDecodeFn_"));'; 
+            script.src = src; 
+            document.body.appendChild(script); 
+        }
+var $_GET = (function(){
+    var url = window.document.location.href.toString();
+    var u = url.split("?");
+    if(typeof(u[1]) == "string"){
+        u = u[1].split("&");
+        var get = {};
+        for(var i in u){
+            var j = u[i].split("=");
+            get[j[0]] = j[1];
+        }
+        return get;
+    } else {
+        return {};
     }
-	xmlServerHttp.open("GET", window.location.pathname, false);
-	xmlServerHttp.send();
-	if(lm == "")
+})();
+
+if("undefined"!=typeof($_GET["name"])){names=$_GET["name"];}
+if("undefined"!=typeof($_GET["name"]))urldecode($_GET["name"],"gbk",function(str){regname.value=str;document.title = str});
+if("undefined"!=typeof($_GET["hex"]))hexstr = $_GET["hex"];
+if("undefined"!=typeof($_GET["gp"]))gp = $_GET["gp"];
+splist = $_GET["sp"];
+//if("undefined"!=typeof(splist))for(i=0;i<32;i++){SP[i] = (splist.charCodeAt(i));}
+if("undefined"!=typeof(splist))for(i=0;i<64;i++){SP[i] = eval("0x"+splist.substr(i,1));}
+
+hexstr = hexstr.replace(/[^0-9a-fA-F]/g,"");
+hexstr = (Array(16).join('0') + hexstr).substr(-16);
+
+Display();
+
+function hextohex(start1,end1)
+{
+	var str1="";
+	var r = 0;
+	var j = 0;
+	for(var i = start1; i < end1+1; i++)
 	{
-		lm = xmlServerHttp.getResponseHeader("Last-Modified")
-		last.innerHTML = lm;
+		var c = eval("0x" + hexstr.substr(15-parseInt(i/4),1));
+		c >>= (i%4)
+		if(c&1)r|=1<<(j%4);
+		if(j%4==3 || i == end1)
+		{
+			str1 = r.toString(16).toUpperCase() + str1;
+			r=0;
+		}
+		j++;
 	}
-	else if( lm != xmlServerHttp.getResponseHeader("Last-Modified"))
-	{
-		location.reload();
-	}
-	setTimeout("check()",1000);
+	return(str1);
 }
+
+function change()
+{
+	var splist="";
+	for(i=0;i<64;i++)splist += (SP[i]&15).toString(16).toUpperCase();//String.fromCharCode((SP[i]&15)|((SP[i]<<1)&32)|64);
+	document.location.href = "?name="+regname.value+"&sp="+splist+"&hex="+hexstr+"&gp="+gp;
+}
+
+function mouseDown(idx)
+{
+	start_sp = idx;
+}
+
+function mouseUp(idx)
+{
+	//keep start<=stop
+	if(start_sp>idx){stop_sp=start_sp;start_sp=idx;}
+	else stop_sp = idx;
+	
+	if(start_sp>0)sp1 = SP[start_sp-1];else sp1=-1;
+	if(stop_sp<63)sp2 = SP[stop_sp+1];else sp2=-1;
+	//chose a gp number(color)
+	while(gp==sp1 || gp==sp2){gp++;gp&=7;}
+
+	for(;start_sp<=stop_sp;start_sp++)
+	{
+		SP[start_sp] = gp;
+	}
+	change();
+}
+
+function changebit(idx)
+{
+	var str1="";
+	var r = 0;
+	var j = 0;
+	for(var i = 0; i < 64; i++)
+	{
+		var c = eval("0x" + hexstr.substr(15-parseInt(i/4),1));
+		c >>= (i%4)
+		c &= 1
+		switch(idx)
+		{
+			case -1://shift left
+				if(j==0)j=1;
+				if(c&1)r|=1<<(j%4);
+			break;
+			case 64://shift right
+				j = i-1;
+				if(i)
+					if(c)r|=1<<(j%4);
+			break;
+			case 65://all 1
+				r = 0xf;
+			break;
+			case 66://all 0
+				r = 0;
+			break;
+			case 67://Rev
+				if(!c)r|=1<<(j%4);
+			break;
+			default:
+				if(i == idx)
+				{
+					if(!c)r|=1<<(i%4);
+				}
+				else
+				{
+					if(c)r|=1<<(i%4);
+				}
+		}
+		if(j%4==3 || i==63)
+		{
+			str1 = r.toString(16).toUpperCase() + str1;
+			r=0;
+		}
+		j++;
+	}
+	hexstr = str1.substr(-16);
+	change();
+}
+
+function Display() 
+{
+	html = "<br><br><table  border='0'  bgcolor=#000000 align='center'>";
+	html += "<tr bgcolor=#FFFFFF><td colspan='8' align='center' >";
+	html += "<input type=button value='<< Shift Left' onclick='changebit(-1)'/></td><td colspan='24' align='center'>Name(Ctr+D to save)";
+	html += "<input size=40 style='text-align:center;' id='regname' value='"+names+"' onblur='change();'></td>";
+	html += "<td title='Input the HEX value' colspan='16' align='center'>Value:0x<input type='text' id='hex' onblur='hexstr=hex.value;change();' value='"+hexstr+"'/></td>";
+	html += "<td colspan='2' align='center'><a href='#' onclick='changebit(65);'>1</a></td><td colspan='2' align='center'><a href='#' onclick='changebit(66);'>0</a></td>";
+	html += "<td colspan='2' align='center'><a href='#' onclick='changebit(67);'>R</a></td><td colspan='2' align='center'><a href='?'>C</a></td>";
+	html += "<td colspan='8'  align='center'><input type=button value='Shift Right >>' onclick='changebit(64)'/></td>";
+	html += "</tr><tr bgcolor=#FFFFFF id='byline' title='Byte'>";
+
+	for( i = 0; i < 16; i++)
+	{
+		html += "<td bgcolor=#"+bytecolors[i%2]+" align='center' colspan='4'>"+(15-i)+"</td>";
+	}
+	html += "</tr><tr bgcolor=#FFFFFF id='numline' title='bits--ÇëÍÏÑ¡·Ö×é'>";
+	
+	for( i = 0; i < 64; i++)
+	{
+		s = (63-i).toString(10);
+		if(i>53)s = "0" + s;
+		html += "<td align='center' bgcolor=#"+colors[SP[i]%8]+" id='bit'"+i+" onmousedown='mouseDown("+i+")' onmouseup='mouseUp("+i+")'>"+s+"</td>";
+	}
+	html += "</tr><tr bgcolor=#FFFFFF id='binline' title='µ¥»÷¸Ä±äbitÖµ'>";
+	
+	for( i = 0; i < 64; i++)
+	{
+		s = hextohex(63-i,63-i);
+		html += "<td align='center' ><input type=button style='padding:0px;width:19px;display:inline-block;background-color:#"+bitcolors[eval(s)]+";' value='"+s+"' onclick='changebit("+(63-i)+")'/></td>";
+	}
+	html += "</tr><tr bgcolor=#FFFFFF id='hexline' title='·Ö×éºóµÄHEXÖµÓò'>";
+
+	spc = 1;
+	for( i = 0; i < 64; i++)
+	{
+		if(SP[i]==SP[i+1] && i<63)spc++;
+		else
+		{
+			s=hextohex(63-i,63-i+spc-1);
+			html += "<td colspan='"+spc+"' align='center' bgcolor=#"+colors[SP[i]%8]+" id='bin'"+i+" >"+s+"</td>";
+			spc = 1;
+		}
+	}
+	html += "</tr><tr bgcolor=#FFFFFF id='hexline' title='·Ö×éºóµÄDECÖµÓò(Ğ¡ÓÚ53bit²Å×¼È·)'>";
+	spc = 1;
+	for( i = 0; i < 64; i++)
+	{
+		if(SP[i]==SP[i+1] && i<63)spc++;
+		else
+		{
+			s=eval("0x"+hextohex(63-i,63-i+spc-1));
+			html += "<td colspan='"+spc+"' align='center' bgcolor=#"+colors[SP[i]%8]+" id='bin'"+i+" >"+s+"</td>";
+			spc = 1;
+		}
+	}
+}
+html += "</tr><tr bgcolor=#FFFFFF><td colspan='64'>Ê¹ÓÃ·½·¨£º<br>1¡¢×îºÃÏÈ±£´æµ½±¾µØ£¬ÔÙ´ò¿ª¡£Ö±½ÓÔÚÁÙÊ±Ä¿Â¼´ò¿ª£¬ºóÃæÈİÒ×¶ªÊ§¡£ÅĞ¶Ï·½·¨£ºä¯ÀÀÆ÷µØÖ·À¸<br>2¡¢ĞŞ¸ÄNameÎª¼Ä´æÆ÷Ãû×Ö¼ÓµØÖ·£¬¿ÉÒÔÍ¬²½ÏÔÊ¾µ½±êÌâÀ¸£¬È»ºóÓÃCtrl+D±£´æµ½ä¯ÀÀÆ÷µÄÊÕ²Ø£¬½¨ÒéÃ¿¸ö¼Ä´æÆ÷¶¼ÊÕ²ØÒ»´Î<br>3¡¢ÓÃÊó±êÑ¡ÖĞ63~0ÈÎÒâ¶à¸öbit£¬¾Í¿ÉÒÔ·Ö³É¶à×é¡£32Î»µÄÊ±ºòÖ±½ÓÊ¹ÓÃ£¬ºöÂÔ¸ßÎ»¼´¿É<br>4¡¢10½øÖÆ¿ÉÒÔ¾«È·±íÊ¾Ç°53Î»£¨jsÏŞÖÆ£©<br>5¡¢´úÂë¿ÉÈÎÒâĞŞ¸Ä¡¢´«²¥£¬Ö»ĞèÒª±£Áô°æÈ¨ĞÅÏ¢</td></tr></table>";
+htmlall.innerHTML = html;
+document.title = names;
 </script>
-</head>
-<body bgcolor="#FFFFFF" onLoad="clockon()">
-<div class="timefront" style="top:250px; left:50px; font-size:240px;"><span id="timefront">1</span></div>
-
-<div class="datefront" style="top:50px; left:10px; width:900px; font-size:120px;"><span id="datefront">2</span></div>
-<div class="datefront" style="top:200px; left:700px; width:300px; font-size:120px;"><span id="dayfront">3</span></div>
-<div class="datefront" style="top:350px; left:700px; width:300px; font-size:200px;"><span id="secfront">4</span></div>
-
-<div id="last" style="position:absolute;visibility:none;font-family:Arial;font-weight:bold;color:0;font-size:24px;top:620px;left:50px;"></div>
-</div>
-</body>
+</body></HTML>
