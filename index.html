@@ -16,9 +16,8 @@ Open Source 不代表放弃著作权，任何形式之引用或转载前请来�
 
 Yi chang (仪长 00340119) <yichang99@126.com>
 
- --------------------------------------
+*************************************************
 简体中文(作者授权)
-
 【尊重他人创作·请勿删除或变更此说明】
 *************************************************
 
@@ -29,6 +28,8 @@ Yi chang (仪长 00340119) <yichang99@126.com>
  - 修改实现，兼容chrome、IE8
 2018-9-4
  - 升级为64位版本
+2021-01-08
+ - Translate to English
 ******************************************** -->
 <HTML><HEAD><TITLE>寄存器分析(js版)</TITLE>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -36,9 +37,24 @@ Yi chang (仪长 00340119) <yichang99@126.com>
 </HEAD>
 <body>
 <div id="htmlall"></div>
+<div id="hide" hidden>
+	<br><br><table  border='0'  bgcolor=#000000 align='center'>
+		<tr bgcolor=#FFFFFF><td colspan='8' align='center' >
+		<input type=button value='<< Shift Left' onclick='changebit(-1)'/></td><td colspan='24' align='center'>Name(Ctr+D to save)
+		<input size=40 style='text-align:center;' id='regname' value='RegName' onblur='change();'></td>
+		<td title='Input the HEX value' colspan='16' align='center'>Value:0x<input type='text' id='hex' onblur='hexstr=hex.value;change();' value='hexstrvalue'/></td>
+		<td colspan='2' align='center'><a href='#' onclick='changebit(65);'>1</a></td><td colspan='2' align='center'><a href='#' onclick='changebit(66);'>0</a></td>
+		<td colspan='2' align='center'><a href='#' onclick='changebit(67);' title='Reverse every bits'>R</a></td><td colspan='2' align='center'><a href='#' title='Clear the bit goups'>C</a></td>
+		<td colspan='8'  align='center'><input type=button value='Shift Right >>' onclick='changebit(64)'/></td>
+		</tr>
+		<!-- htmlcontent -->
+		<tr bgcolor=#FFFFFF><td colspan='64'>Usage:<br>
+			1. Select multi-bits use mouse to define the Register64 bit zone.<br>
+			2. Change the RegName and use Ctrl+D to save for every Register define.</td></tr></table>
+</div>
 <SCRIPT language=JScript>
 var hexstr="123456789ABCDEF0";
-var names="寄存器";
+var names="64 bits Register helper";
 var gp=0;
 var SP = new Array(65);
 var colors = ["5555FF","FF5555","33FF33","00FFFF","FF00FF","FFFF00","77FFCC","CC77FF"];
@@ -46,7 +62,8 @@ var bytecolors = ["CCCCCC","FFFFFF"];
 var bitcolors = ["CCCCCC","FF0000"];
 var start_sp = 0;
 var end_sp = 0;
-
+var htmlcontent = hide.innerHTML;
+hide.innerHTML = "";
 //init
 for( i = 0; i < 65; i++)
 {
@@ -193,36 +210,27 @@ function changebit(idx)
 
 function Display() 
 {
-	html = "<br><br><table  border='0'  bgcolor=#000000 align='center'>";
-	html += "<tr bgcolor=#FFFFFF><td colspan='8' align='center' >";
-	html += "<input type=button value='<< Shift Left' onclick='changebit(-1)'/></td><td colspan='24' align='center'>Name(Ctr+D to save)";
-	html += "<input size=40 style='text-align:center;' id='regname' value='"+names+"' onblur='change();'></td>";
-	html += "<td title='Input the HEX value' colspan='16' align='center'>Value:0x<input type='text' id='hex' onblur='hexstr=hex.value;change();' value='"+hexstr+"'/></td>";
-	html += "<td colspan='2' align='center'><a href='#' onclick='changebit(65);'>1</a></td><td colspan='2' align='center'><a href='#' onclick='changebit(66);'>0</a></td>";
-	html += "<td colspan='2' align='center'><a href='#' onclick='changebit(67);'>R</a></td><td colspan='2' align='center'><a href='?'>C</a></td>";
-	html += "<td colspan='8'  align='center'><input type=button value='Shift Right >>' onclick='changebit(64)'/></td>";
-	html += "</tr><tr bgcolor=#FFFFFF id='byline' title='Byte'>";
-
-	for( i = 0; i < 16; i++)
+	html = "<tr bgcolor=#FFFFFF id='byline' title='Byte'>";
+	for( i = 0; i < 8; i++)
 	{
-		html += "<td bgcolor=#"+bytecolors[i%2]+" align='center' colspan='4'>"+(15-i)+"</td>";
+		html += "<td bgcolor=#"+bytecolors[i%2]+" align='center' colspan='8'>Byte:"+(7-i)+"</td>";
 	}
-	html += "</tr><tr bgcolor=#FFFFFF id='numline' title='bits--请拖选分组'>";
+	html += "</tr><tr bgcolor=#FFFFFF id='numline' title='bits:Click or Select multi-columes'>";
 	
 	for( i = 0; i < 64; i++)
 	{
 		s = (63-i).toString(10);
 		if(i>53)s = "0" + s;
-		html += "<td align='center' bgcolor=#"+colors[SP[i]%8]+" id='bit'"+i+" onmousedown='mouseDown("+i+")' onmouseup='mouseUp("+i+")'>"+s+"</td>";
+		html += "<td align='center' bgcolor=#"+colors[SP[i]%8]+" id='bit'"+i+" onmousedown='mouseDown("+i+")' onmouseup='mouseUp("+i+")'><span style='padding:0px;width:18px;display:inline-block;'>"+s+"</span></td>";
 	}
-	html += "</tr><tr bgcolor=#FFFFFF id='binline' title='单击改变bit值'>";
+	html += "</tr><tr bgcolor=#FFFFFF id='binline' title='Click to change this bit'>";
 	
 	for( i = 0; i < 64; i++)
 	{
 		s = hextohex(63-i,63-i);
-		html += "<td align='center' ><input type=button style='padding:0px;width:19px;display:inline-block;background-color:#"+bitcolors[eval(s)]+";' value='"+s+"' onclick='changebit("+(63-i)+")'/></td>";
+		html += "<td align='center' ><input type=button style='padding:0px;width:18px;display:inline-block;background-color:#"+bitcolors[eval(s)]+";' value='"+s+"' onclick='changebit("+(63-i)+")'/></td>";
 	}
-	html += "</tr><tr bgcolor=#FFFFFF id='hexline' title='分组后的HEX值域'>";
+	html += "</tr><tr bgcolor=#FFFFFF id='hexline' title='Hex Value of this group'>";
 
 	spc = 1;
 	for( i = 0; i < 64; i++)
@@ -235,7 +243,7 @@ function Display()
 			spc = 1;
 		}
 	}
-	html += "</tr><tr bgcolor=#FFFFFF id='hexline' title='分组后的DEC值域(小于53bit才准确)'>";
+	html += "</tr><tr bgcolor=#FFFFFF id='hexline' title='DEC Value of this group'>";
 	spc = 1;
 	for( i = 0; i < 64; i++)
 	{
@@ -247,9 +255,9 @@ function Display()
 			spc = 1;
 		}
 	}
+	html += "</tr>"
+	htmlall.innerHTML = htmlcontent.replace("<!-- htmlcontent -->",html).replace("hexstrvalue",hexstr); //
 }
-html += "</tr><tr bgcolor=#FFFFFF><td colspan='64'>使用方法：<br>1、最好先保存到本地，再打开。直接在临时目录打开，后面容易丢失。判断方法：浏览器地址栏<br>2、修改Name为寄存器名字加地址，可以同步显示到标题栏，然后用Ctrl+D保存到浏览器的收藏，建议每个寄存器都收藏一次<br>3、用鼠标选中63~0任意多个bit，就可以分成多组。32位的时候直接使用，忽略高位即可<br>4、10进制可以精确表示前53位（js限制）<br>5、代码可任意修改、传播，只需要保留版权信息</td></tr></table>";
-htmlall.innerHTML = html;
 document.title = names;
 </script>
 </body></HTML>
